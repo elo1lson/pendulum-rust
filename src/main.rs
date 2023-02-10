@@ -8,23 +8,28 @@ fn main() {
     let window = Window::new_centered("Pendulum", (800, 480)).unwrap();
 
     let win = MyWindowHandler {
-        p: Pendulum::new(400.0, 0.0, 200.0),
+        p1: Pendulum::new(400.0, 0.0, 200.0),
+        p2: Pendulum::new(400.0, 0.0, 280.0),
     };
-    window.run_loop(win)
+    window.run_loop(win);
 }
 
 struct MyWindowHandler {
-    p: Pendulum,
+    p1: Pendulum,
+    p2: Pendulum,
 }
 
 impl WindowHandler for MyWindowHandler {
     fn on_draw(&mut self, helper: &mut WindowHelper<()>, graphics: &mut Graphics2D) {
         graphics.clear_screen(Color::BLACK);
-        self.p.update();
-        self.p.draw(graphics);
+        self.p1.update();
+        self.p1.draw(graphics);
+        self.p2.update();
+        self.p2.draw(graphics);
         helper.request_redraw()
     }
 }
+
 struct Pendulum {
     origin: Vector,
     position: Vector,
@@ -32,7 +37,6 @@ struct Pendulum {
     angular_velocity: f32,
     angular_acceleration: f32,
     r: f32,
-    m: f32,
     g: f32,
 }
 
@@ -44,7 +48,6 @@ impl Pendulum {
             angle: 1.0,
             angular_velocity: 0.0,
             angular_acceleration: 0.0,
-            m: 1.0,
             g: 1.5,
             r,
         }
@@ -64,7 +67,7 @@ impl Pendulum {
     fn draw(&self, graphics: &mut Graphics2D) {
         graphics.draw_line(
             (self.origin.x, self.origin.y),
-            (self.origin.x, self.origin.y),
+            (self.position.x, self.position.y),
             5.0,
             Color::WHITE,
         );
