@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 mod vector;
 use speedy2d::color::Color;
 use speedy2d::window::{WindowHandler, WindowHelper};
@@ -64,7 +66,7 @@ impl Pendulum {
     fn draw(&self, graphics: &mut Graphics2D) {
         graphics.draw_line(
             (self.origin.x, self.origin.y),
-            (self.origin.x, self.origin.y),
+            (self.position.x, self.position.y),
             5.0,
             Color::WHITE,
         );
