@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 mod vector;
 use speedy2d::color::Color;
 use speedy2d::window::{WindowHandler, WindowHelper};
